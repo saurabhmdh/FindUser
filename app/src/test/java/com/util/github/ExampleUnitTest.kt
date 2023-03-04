@@ -1,4 +1,4 @@
-package com.util.github
+package com.sample.dsl
 
 import org.junit.Test
 

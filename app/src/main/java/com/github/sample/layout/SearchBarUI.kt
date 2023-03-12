@@ -105,7 +105,8 @@ fun SearchBar(
                     unfocusedIndicatorColor = Color.Transparent,
                     backgroundColor = Color.Transparent,
                     textColor = Color.White,
-                    cursorColor = Color.White
+                    cursorColor = Color.White,
+                    placeholderColor = Color.Gray,
                 ),
                 trailingIcon = {
                     AnimatedVisibility(

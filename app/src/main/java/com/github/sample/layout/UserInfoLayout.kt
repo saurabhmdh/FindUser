@@ -46,7 +46,7 @@ fun UserInfoScreen(
     onBackClick: () -> Unit,
     onItemClick: (String) -> Unit,
 ) {
-    viewModel.getUserRepositoryList(userName)
+//    viewModel.getUserRepositoryList(userName)
     viewModel.getUserInfo(userName)
     Scaffold(content = {
         Column(modifier = Modifier.fillMaxSize()) {

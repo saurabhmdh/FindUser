@@ -1,5 +1,6 @@
 package com.github.sample.layout
 
+
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,15 +15,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -50,7 +50,7 @@ fun UserInfoScreen(
     viewModel.getUserInfo(userName)
     Scaffold(content = {
         Column(modifier = Modifier.fillMaxSize()) {
-            UserToolBar(title = "User Details", onNavigationIconClick = onBackClick)
+            UserToolBar(title = userName, onNavigationIconClick = onBackClick)
             UserInfoBody(modifier = modifier, viewModel = viewModel, onItemClick = onItemClick)
         }
     })
@@ -58,7 +58,21 @@ fun UserInfoScreen(
 
 @Composable
 private fun UserToolBar(title: String, onNavigationIconClick: () -> Unit) {
-
+    TopAppBar(
+        title = { Text(title) },
+        backgroundColor = Color.Blue,
+        contentColor = Color.White,
+        navigationIcon = {
+            IconButton(onClick = { onNavigationIconClick() }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    modifier = Modifier,
+                    contentDescription = "",
+                    tint = Color.White
+                )
+            }
+        }
+    )
 }
 
 @Composable

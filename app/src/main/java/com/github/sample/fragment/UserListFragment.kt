@@ -25,7 +25,14 @@ class UserListFragment : Fragment() {
         setContent {
             SearchSuggestionScreen(viewModel = viewModel, onItemClick = { userName ->
                 findNavController().navigate(R.id.userDetailFragment, bundleOf("userName" to userName))
+            },
+            onNavigateBack = {
+                handleBackKey()
             })
         }
+    }
+
+    private fun handleBackKey() {
+        activity?.onBackPressed()
     }
 }

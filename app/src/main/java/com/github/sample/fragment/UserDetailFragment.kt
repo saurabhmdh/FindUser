@@ -24,8 +24,9 @@ class UserDetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ) = ComposeView(requireContext()).apply {
         setContent {
+            val userName = arguments?.getString("userName") ?: "saurabhmdh"
             UserInfoScreen(
-                userName = "alok",
+                userName = userName,
                 modifier = Modifier, viewModel = viewModel,
                 onBackClick = { findNavController().popBackStack() },
                 onItemClick = { url -> openUrl(url) }

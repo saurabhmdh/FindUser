@@ -76,11 +76,7 @@ class GithubApiModule {
     @Singleton
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Timber.tag("GithubAPI").i(message)
-            }
-        })
+        val interceptor = HttpLoggingInterceptor { message -> Timber.tag("GithubAPI").i(message) }
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }

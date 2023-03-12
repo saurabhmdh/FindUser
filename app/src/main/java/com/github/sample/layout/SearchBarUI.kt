@@ -156,7 +156,7 @@ fun NoSearchResults() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(12.dp))
-            Text("No result.", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            Text("Please input word", fontSize = 20.sp, fontWeight = FontWeight.Bold)
        }
     }
 }

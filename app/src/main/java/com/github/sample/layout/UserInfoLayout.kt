@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -37,6 +38,8 @@ import com.github.sample.ui.theme.black33
 import com.github.sample.ui.theme.whiteBCG
 import com.github.sample.viewmodel.SearchSuggestionViewModel
 import timber.log.Timber
+import kotlin.math.ceil
+import kotlin.math.floor
 
 @Composable
 fun UserInfoScreen(
@@ -84,7 +87,6 @@ private fun UserInfoBody(
     val userRepoList = viewModel.userRepoListFlow.collectAsState().value
     val userInfo = viewModel.userInfoFlow.collectAsState().value
 
-    Timber.i("list = ${userInfo}")
     LazyColumn(modifier = modifier.padding(16.dp)) {
         item {
             if (userInfo != null) {
@@ -95,7 +97,7 @@ private fun UserInfoBody(
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Followers", style = TextStyle(black33, 18.sp,
+                text = "Repositories", style = TextStyle(black33, 18.sp,
                     FontWeight.Bold), textAlign = TextAlign.Center)
         }
         items(userRepoList) { repo ->
@@ -117,11 +119,10 @@ private fun UserRepositoryItem(repo: UserRepositoryItem, onItemClick: (String) -
                 onItemClick.invoke(repo.url.orEmpty())
             }) {
             Text(text = repo.name.orEmpty(), style = TextStyle(black33, 18.sp, FontWeight.Bold))
-            Text(text = repo.description.orEmpty(),
-                style = TextStyle(black33, 12.sp, FontWeight.Normal))
+            repo.startCount?.toDouble()?.let { RatingBar(rating = it) }
             Text(text = repo.language.orEmpty(),
                 style = TextStyle(black33, 12.sp, FontWeight.Normal))
-            Text(text = "${repo.startCount?.or(0)}",
+            Text(text = repo.description.orEmpty(),
                 style = TextStyle(black33, 12.sp, FontWeight.Normal))
         }
     }
@@ -168,3 +169,26 @@ private fun UserInfoScreen(user: GithubUser) {
     }
 }
 
+
+@Composable
+fun RatingBar(
+    modifier: Modifier = Modifier,
+    rating: Double = 0.0,
+    stars: Int = 5,
+    starsColor: Color = Color.Red,
+) {
+    val filledStars = floor(rating).toInt()
+    val unfilledStars = (stars - ceil(rating)).toInt()
+    Row(modifier = modifier) {
+        repeat(filledStars) {
+            Icon(imageVector = Icons.Outlined.Star, contentDescription = null, tint = starsColor)
+        }
+        repeat(unfilledStars) {
+            Icon(
+                imageVector = Icons.Outlined.Star,
+                contentDescription = null,
+                tint = Color.LightGray
+            )
+        }
+    }
+}

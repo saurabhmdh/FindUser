@@ -15,6 +15,6 @@ data class UserRepositoryItem(
     @SerializedName("html_url")
     var url: String?,
 
-    @SerializedName("forks_count")
+    @SerializedName("stargazers_count")
     var startCount: Int?,
 )

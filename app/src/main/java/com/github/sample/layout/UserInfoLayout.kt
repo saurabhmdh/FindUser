@@ -119,9 +119,9 @@ private fun UserRepositoryItem(repo: UserRepositoryItem, onItemClick: (String) -
                 onItemClick.invoke(repo.url.orEmpty())
             }) {
             Text(text = repo.name.orEmpty(), style = TextStyle(black33, 18.sp, FontWeight.Bold))
-            repo.startCount?.toDouble()?.let { RatingBar(rating = it) }
             Text(text = repo.language.orEmpty(),
                 style = TextStyle(black33, 12.sp, FontWeight.Normal))
+            repo.startCount?.toDouble()?.let { RatingBar(rating = it) }
             Text(text = repo.description.orEmpty(),
                 style = TextStyle(black33, 12.sp, FontWeight.Normal))
         }
